@@ -1,6 +1,7 @@
 {
   "name": "blogget",
   "version": "0.1.0",
+  "homepage": "https://yuriysw.github.io/blogget/",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
