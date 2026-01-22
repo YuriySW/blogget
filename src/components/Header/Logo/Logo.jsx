@@ -8,10 +8,3 @@ export const Logo = () => {
     </a>
   );
 };
-// export const Logo = () => {
-//   return (
-//     <a className={style.link} href="/">
-//       <img className={style.logo} src="/img/logo.svg" alt="Blogget Logo" />
-//     </a>
-//   );
-// };
