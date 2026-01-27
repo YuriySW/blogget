@@ -20,9 +20,7 @@
 import PropTypes from 'prop-types';
 import style from './Heading.module.css';
 
-const Heading = ({text}) => {
-  return <h1 className={style.heading}>{text}</h1>;
-};
+const Heading = ({text}) => <h1 className={style.heading}>{text}</h1>;
 
 Heading.propTypes = {
   text: PropTypes.string.isRequired,

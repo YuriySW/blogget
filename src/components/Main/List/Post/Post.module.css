@@ -1,0 +1,24 @@
+.post {
+  position: relative;
+  flex: 1 1 550px;
+  display: grid;
+  grid-template-rows: 1fr min-content;
+  grid-template-columns: 120px 1fr;
+  grid-template-areas:
+    'img content rating'
+    'img content rating'
+    'img data rating';
+  column-gap: 20px;
+  background: var(--white);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
+@media (min-width: 580px) {
+  .post {
+    grid-template-columns: 195px 1fr;
+    grid-template-areas:
+      'img content content'
+      'img rating data';
+  }
+}
