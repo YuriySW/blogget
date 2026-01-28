@@ -1,26 +1,12 @@
-// import style from './Heading.module.css';
-
-// export const Heading = (props) => {
-//   return <h1 className={style.heading}>{props.text}Главная</h1>;
-// };
-
-// import PropTypes from 'prop-types';
-// import style from './Heading.module.css';
-
-// const Heading = ({text}) => {
-//   return <h1 className={style.heading}>{text}</h1>;
-// };
-
-// Heading.propTypes = {
-//   text: PropTypes.string.isRequired,
-// };
-
-// export default Heading;
-
 import PropTypes from 'prop-types';
 import style from './Heading.module.css';
+import {Text} from '../../../Ul/Text/Text';
 
-const Heading = ({text}) => <h1 className={style.heading}>{text}</h1>;
+const Heading = ({text}) => (
+  <Text As="h1" size={22} tsize={26} center className={style.heading}>
+    {text}
+  </Text>
+);
 
 Heading.propTypes = {
   text: PropTypes.string.isRequired,

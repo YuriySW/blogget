@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import style from './Rating.module.css';
+import {Text} from '../../../../../Ul/Text/Text';
 
 export const Rating = ({ups, onUpvote, onDownvote}) => (
   <div className={style.rating}>
@@ -8,7 +9,9 @@ export const Rating = ({ups, onUpvote, onDownvote}) => (
       aria-label="Повысить рейтинг"
       onClick={onUpvote}
     />
-    <p className={style.ups}>{ups}</p>
+    <Text As="p" bold color="grey8f" size={12} tsize={16}>
+      {ups}
+    </Text>
     <button
       className={style.down}
       aria-label="Понизить рейтинг"
