@@ -1,22 +1,28 @@
 {
   "files": {
-    "main.css": "/blogget/static/css/main.6944a8c2.css",
-    "main.js": "/blogget/static/js/main.151817f3.js",
+    "main.css": "/blogget/static/css/main.6119ae58.css",
+    "main.js": "/blogget/static/js/main.0e66ed21.js",
     "static/media/merriweather-sans-v20-latin_cyrillic-ext-700.woff": "/blogget/static/media/merriweather-sans-v20-latin_cyrillic-ext-700.d14ade0212b2a8541413.woff",
     "static/media/merriweather-sans-v20-latin_cyrillic-ext-500.woff": "/blogget/static/media/merriweather-sans-v20-latin_cyrillic-ext-500.2206a760c25c43b14af8.woff",
     "static/media/merriweather-sans-v20-latin_cyrillic-ext-regular.woff": "/blogget/static/media/merriweather-sans-v20-latin_cyrillic-ext-regular.44846330ef5e4435929c.woff",
     "static/media/merriweather-sans-v20-latin_cyrillic-ext-700.woff2": "/blogget/static/media/merriweather-sans-v20-latin_cyrillic-ext-700.e85ac293918fc6af7b45.woff2",
     "static/media/merriweather-sans-v20-latin_cyrillic-ext-500.woff2": "/blogget/static/media/merriweather-sans-v20-latin_cyrillic-ext-500.72bde37dd57b911700f5.woff2",
     "static/media/merriweather-sans-v20-latin_cyrillic-ext-regular.woff2": "/blogget/static/media/merriweather-sans-v20-latin_cyrillic-ext-regular.4117fa953d231092315a.woff2",
+    "static/media/best.svg": "/blogget/static/media/best.bdc35cdcd6156268464c80ad4f522bb4.svg",
+    "static/media/top.svg": "/blogget/static/media/top.5db0937592cde6e0d61a78e8f0baacc4.svg",
     "static/media/logo.svg": "/blogget/static/media/logo.5332ef986395c9a231d531c693a9b11e.svg",
+    "static/media/home.svg": "/blogget/static/media/home.967450915b3e6a415ee435a81a9498f4.svg",
+    "static/media/hot.svg": "/blogget/static/media/hot.490f97b97ea28edfff996bceb363cad4.svg",
+    "static/media/login.svg": "/blogget/static/media/login.75eb8abd9b591d2a09d7aeba8fd1a8d2.svg",
     "index.html": "/blogget/index.html",
+    "static/media/arrow.svg": "/blogget/static/media/arrow.d412babf78121a5fea10a05d7b1502fb.svg",
     "static/media/up.svg": "/blogget/static/media/up.1c426ad418b0a7d3d05c.svg",
     "static/media/down.svg": "/blogget/static/media/down.43603c59a9a1a57128ab.svg",
-    "main.6944a8c2.css.map": "/blogget/static/css/main.6944a8c2.css.map",
-    "main.151817f3.js.map": "/blogget/static/js/main.151817f3.js.map"
+    "main.6119ae58.css.map": "/blogget/static/css/main.6119ae58.css.map",
+    "main.0e66ed21.js.map": "/blogget/static/js/main.0e66ed21.js.map"
   },
   "entrypoints": [
-    "static/css/main.6944a8c2.css",
-    "static/js/main.151817f3.js"
+    "static/css/main.6119ae58.css",
+    "static/js/main.0e66ed21.js"
   ]
 }
