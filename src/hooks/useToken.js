@@ -1,7 +1,4 @@
 import {useState, useEffect} from 'react';
-import {CLIENT_ID, TOKEN_URL, REDIRECT_URI} from '../api/const';
-
-const CLIENT_SECRET = '1985b8735992b446f3dea15e5ba8e10bc61ff90a';
 
 export const useToken = () => {
   const [token, setToken] = useState(
@@ -25,19 +22,12 @@ export const useToken = () => {
       }
 
       if (code) {
-        fetch(`https://cors-anywhere.herokuapp.com/${TOKEN_URL}`, {
+        fetch('https://github-oauth-proxy-vercel.vercel.app', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            // eslint-disable-next-line quote-props
-            Accept: 'application/json',
           },
-          body: JSON.stringify({
-            client_id: CLIENT_ID,
-            client_secret: CLIENT_SECRET,
-            code,
-            redirect_uri: REDIRECT_URI,
-          }),
+          body: JSON.stringify({code}), // ← только code, остальное на сервере
         })
           .then((res) => {
             // eslint-disable-next-line max-len
