@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting...</title>
+    <script>
+      // Редирект на главную с сохранением всего после # или ? (query + hash)
+      const path =
+        window.location.pathname +
+        window.location.search +
+        window.location.hash;
+      const repoName = '/blogget'; // имя твоего репозитория (из URL https://yuriysw.github.io/blogget/)
+      window.location.replace(window.location.origin + repoName + '#' + path);
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to app...</p>
+  </body>
+</html>
