@@ -1,11 +1,130 @@
-.button {
+.btn {
   display: block;
   background-color: transparent;
   border: 0;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    border-radius: 15px;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.container {
+  position: relative;
+  display: block;
+  text-align: center;
+}
+
+.logout {
+  position: absolute;
+  top: 90%;
+  right: 0;
+  background-color: var(--orange);
+  border: 0;
+  color: var(--white);
+  padding: 4px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  @media (max-width: 768px) {
+    width: 30px;
+    height: 17px;
+    font-size: 7px;
+  }
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.authLink {
+  display: block;
+  width: 30px;
+  height: 30px;
+  outline: 2px solid transparent;
+  border-radius: 50%;
+  outline-offset: 2px;
+  transition: outline-color 0.36s ease-in-out;
+}
+
+.authLink:hover {
+  outline-color: var(--orange);
+}
+
+.authLink:focus {
+  outline-color: var(--orange);
+}
+
+.authLink:active {
+  outline-color: var(--orange);
 }
 
 .svg {
   width: 100%;
   height: 100%;
-  color: #cc6633;
+  color: var(--orange);
 }
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 30%;
+  object-fit: cover;
+  border: 2px solid #e1e4e8;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 50px;
+    height: 30px;
+    border-radius: 20%;
+  }
+}
+
+.avatarBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.loader {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 4px solid #e1e4e8; /* светлый фон */
+  border-top: 4px solid #0366d6; /* синий GitHub-цвет */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* @media (min-width: 768px) {
+  .btn {
+    border-radius: 15px;
+    width: 50px;
+    height: 50px;
+  }
+} */
