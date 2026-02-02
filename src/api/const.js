@@ -9,7 +9,10 @@ export const RESPONSE_TYPE = 'code'; // для Authorization Code Flow (стан
 
 export const RANDOM_STRING = 'random_string_abc123'; // state для защиты от CSRF, можно сгенерировать случайно
 
-export const REDIRECT_URI = 'http://localhost:3000/auth';
+export const REDIRECT_URI =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000/auth'
+    : 'https://yuriysw.github.io/blogget/auth';
 
 export const SCOPE = 'user'; // или 'user:email read:org' — через пробел, если нужно больше
 
