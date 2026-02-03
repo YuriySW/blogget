@@ -107,7 +107,7 @@
   width: 28px;
   height: 28px;
   border: 4px solid #e1e4e8; /* светлый фон */
-  border-top: 4px solid #0366d6; /* синий GitHub-цвет */
+  border-top: 4px solid var(--orange); /* синий GitHub-цвет */
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }

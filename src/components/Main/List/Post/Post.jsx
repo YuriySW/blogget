@@ -8,18 +8,14 @@ import {Rating} from './Rating/Rating';
 import {PostDate} from './PostDate/PostDate';
 
 export const Post = ({postData}) => {
-  const {title, author, ups, date} = postData;
+  const {title, author, ups, date, thumbnail} = postData;
 
   return (
     <li className={style.post}>
-      <PostImage src={notphoto} alt={title} />
-
+      <PostImage src={thumbnail || notphoto} alt={title} />
       <PostContent title={title} author={author} />
-
       <DeleteButton />
-
       <Rating ups={ups} />
-
       <PostDate date={date} />
     </li>
   );
@@ -27,9 +23,12 @@ export const Post = ({postData}) => {
 
 Post.propTypes = {
   postData: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
     ups: PropTypes.number.isRequired,
-    date: PropTypes.string.isRequired,
+    date: PropTypes.number.isRequired,
+    thumbnail: PropTypes.string,
+    url: PropTypes.string,
   }).isRequired,
 };
