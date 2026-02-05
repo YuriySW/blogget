@@ -14,7 +14,7 @@ export const useBestPosts = () => {
 
       try {
         const response = await fetch(
-          'https://www.reddit.com/best.json?limit=10',
+          'https://api.reddit.com/best.json?limit=10',
           {
             headers: {
               'User-Agent': 'MyRedditClient/0.1 (educational project)',
