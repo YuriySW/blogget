@@ -4,14 +4,17 @@ import {AuthContextProvider} from './context/authContext';
 import {PostsProvider} from './context/postsContext';
 import Header from './components/Header';
 import Main from './components/Main';
+import {PostModalProvider} from './context/PostModalContext';
 
 function App() {
   return (
     <TokenProvider>
       <AuthContextProvider>
         <PostsProvider>
-          <Header />
-          <Main />
+          <PostModalProvider>
+            <Header />
+            <Main />
+          </PostModalProvider>
         </PostsProvider>
       </AuthContextProvider>
     </TokenProvider>

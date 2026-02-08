@@ -7,13 +7,18 @@ import {DeleteButton} from './DeleteButton/DeleteButton';
 import {Rating} from './Rating/Rating';
 import {PostDate} from './PostDate/PostDate';
 
-export const Post = ({postData}) => {
-  const {title, author, ups, date, thumbnail} = postData;
+export const Post = ({postData, onTitleClick}) => {
+  const {title, author, ups, date, thumbnail, url} = postData;
 
   return (
     <li className={style.post}>
       <PostImage src={thumbnail || notphoto} alt={title} />
-      <PostContent title={title} author={author} />
+      <PostContent
+        title={title}
+        author={author}
+        url={url}
+        onTitleClick={onTitleClick}
+      />
       <DeleteButton />
       <Rating ups={ups} />
       <PostDate date={date} />
@@ -31,4 +36,5 @@ Post.propTypes = {
     thumbnail: PropTypes.string,
     url: PropTypes.string,
   }).isRequired,
+  onTitleClick: PropTypes.func.isRequired,
 };

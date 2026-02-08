@@ -7,7 +7,14 @@ const formatDate = (date) => {
     minute: '2-digit',
   };
 
-  return new Intl.DateTimeFormat('ru', options).format(new Date(date));
+  const dateObj = new Date(date);
+
+  if (isNaN(dateObj.getTime())) {
+    console.error('Invalid date:', date);
+    return 'Неверная дата';
+  }
+
+  return new Intl.DateTimeFormat('ru', options).format(dateObj);
 };
 
 export default formatDate;

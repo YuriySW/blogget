@@ -16,6 +16,7 @@ export const Text = (prop) => {
     left,
     medium,
     bold,
+    ...restProps
   } = prop;
 
   const classes = classNames(
@@ -31,7 +32,7 @@ export const Text = (prop) => {
   );
 
   return (
-    <As className={classes} href={href}>
+    <As className={classes} href={href} {...restProps}>
       {children}
     </As>
   );
