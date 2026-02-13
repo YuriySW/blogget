@@ -5,7 +5,7 @@ import {
   RANDOM_STRING,
   REDIRECT_URI,
   SCOPE,
-} from './const'; // или './api/const' — подставь свой путь
+} from './const';
 
 const searchParams = new URLSearchParams();
 

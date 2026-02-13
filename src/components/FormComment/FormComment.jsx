@@ -1,26 +1,32 @@
 import style from './FormComment.module.css';
-
-import {useRef} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {Text} from '../../Ul/Text/Text';
+import {updateComment} from '../../store/index';
 
 export const FormComment = () => {
-  const textareaRef = useRef(null);
+  const value = useSelector((state) => state.comment);
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const text = textareaRef.current.value.trim();
-    if (text) {
-      console.log('Новый комментарий:', text);
-      textareaRef.current.value = '';
-    }
+
+    console.log('Новый комментарий:', value);
+  };
+
+  const handleChange = (e) => {
+    dispatch(updateComment(e.target.value));
   };
 
   return (
     <form className={style.form} onSubmit={handleSubmit}>
-      <h3>Ваш комментарий</h3>
+      <Text As="h3" size={14} tsize={18}>
+        Ваш комментарий
+      </Text>
       <textarea
-        ref={textareaRef}
         className={style.textarea}
         placeholder="Напишите комментарий..."
+        value={value}
+        onChange={handleChange}
       />
       <button className={style.btn} type="submit">
         Отправить

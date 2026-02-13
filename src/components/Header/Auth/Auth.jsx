@@ -1,15 +1,15 @@
-import {useState, useContext} from 'react';
+import {useState} from 'react';
 import style from './Auth.module.css';
 import {ReactComponent as LoginIcon} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../Ul/Text/Text';
 import {useAuth} from '../../../hooks/useAuth';
-import {tokenContext} from '../../../context/tokenContext';
+import {useGetToken, useSetToken} from '../../../hooks/useToken';
 
 export const Auth = () => {
-  const {token, delToken} = useContext(tokenContext);
+  const token = useGetToken();
+  const {delToken} = useSetToken();
   const {avatar, isLoadingAvatar, setAvatar} = useAuth(token, delToken);
-
   const [showLogout, setShowLogout] = useState(false);
 
   const handleAvatarClick = () => {
@@ -39,7 +39,6 @@ export const Auth = () => {
               />
             )}
           </button>
-
           {showLogout && (
             <button
               className={style.logout}
