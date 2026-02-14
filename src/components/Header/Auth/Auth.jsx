@@ -5,15 +5,21 @@ import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../Ul/Text/Text';
 import {useAuth} from '../../../hooks/useAuth';
 import {useGetToken, useSetToken} from '../../../hooks/useToken';
+import {AuthLoader} from '../../../Ul/AuthLoader/AuthLoader';
 
 export const Auth = () => {
   const token = useGetToken();
   const {delToken} = useSetToken();
-  const {avatar, isLoadingAvatar, setAvatar} = useAuth(token, delToken);
+  const {avatar, isLoadingAvatar, logout} = useAuth(token, delToken);
   const [showLogout, setShowLogout] = useState(false);
 
   const handleAvatarClick = () => {
     setShowLogout(!showLogout);
+  };
+
+  const handleLogout = () => {
+    logout();
+    setShowLogout(false);
   };
 
   return (
@@ -27,27 +33,17 @@ export const Auth = () => {
             disabled={isLoadingAvatar}
           >
             {isLoadingAvatar || !avatar ? (
-              <div className={style.loader}>
-                <div className={style.spinner}></div>
-              </div>
+              <AuthLoader />
             ) : (
               <img
                 src={avatar}
                 alt="Аватар пользователя"
                 className={style.avatar}
-                onError={() => setAvatar(null)}
               />
             )}
           </button>
           {showLogout && (
-            <button
-              className={style.logout}
-              onClick={() => {
-                delToken();
-                setShowLogout(false);
-                setAvatar(null);
-              }}
-            >
+            <button className={style.logout} onClick={handleLogout}>
               Выйти
             </button>
           )}

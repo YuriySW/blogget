@@ -1,11 +1,11 @@
 import {useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {updateToken, deleteToken} from '../store';
+import {updateToken, deleteToken} from '../store/tokenReducer';
 import {PROXY_URL} from '../api/const.js';
 
 // Функция для получения токена
 export const useGetToken = () => {
-  const token = useSelector((state) => state.token);
+  const token = useSelector((state) => state.token.token);
   return token;
 };
 

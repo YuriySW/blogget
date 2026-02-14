@@ -1,10 +1,10 @@
 import style from './FormComment.module.css';
 import {useDispatch, useSelector} from 'react-redux';
 import {Text} from '../../Ul/Text/Text';
-import {updateComment} from '../../store/index';
+import {updateComment} from '../../store/commentReducer';
 
 export const FormComment = () => {
-  const value = useSelector((state) => state.comment);
+  const value = useSelector((state) => state.comment.comment);
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {

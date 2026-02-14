@@ -4,10 +4,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@redux-devtools/extension": "^3.3.0",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.13.5",
     "classnames": "^2.5.1",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.8.1",
@@ -16,7 +18,9 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.13.0",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.17.0",
     "redux": "^5.0.1",
+    "redux-thunk": "^3.1.0",
     "swiper": "^12.1.0",
     "web-vitals": "^2.1.4"
   },
@@ -27,7 +31,11 @@
     "eject": "react-scripts eject",
     "comp": "hygen create component",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "lint": "eslint src --ext .js,.jsx",
+    "lint:fix": "eslint src --ext .js,.jsx --fix",
+    "format": "prettier --write \"src/**/*.{js,jsx,json,css,scss,md}\"",
+    "format:check": "prettier --check \"src/**/*.{js,jsx,json,css,scss,md}\""
   },
   "eslintConfig": {
     "extends": [
@@ -49,8 +57,11 @@
   },
   "devDependencies": {
     "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
     "eslint-plugin-react": "^7.37.5",
     "gh-pages": "^6.3.0",
-    "hygen": "^6.2.11"
+    "hygen": "^6.2.11",
+    "prettier": "^3.8.1"
   }
 }

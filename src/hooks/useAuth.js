@@ -1,42 +1,30 @@
-import {useState, useEffect} from 'react';
+import {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {authRequestAsync, authLogout} from '../store/auth/action';
+import {setupAuthInterceptor} from '../api/github';
 
 export const useAuth = (token, delToken) => {
-  const [avatar, setAvatar] = useState(null);
-  const [isLoadingAvatar, setIsLoadingAvatar] = useState(false);
+  const dispatch = useDispatch();
+
+  const {
+    avatar,
+    loading: isLoadingAvatar,
+    user,
+  } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    setupAuthInterceptor(delToken);
+  }, [delToken]);
 
   useEffect(() => {
     if (!token || avatar !== null) return;
+    dispatch(authRequestAsync(token));
+  }, [token, avatar, dispatch]);
 
-    setIsLoadingAvatar(true);
+  const logout = () => {
+    delToken();
+    dispatch(authLogout());
+  };
 
-    fetch('https://api.github.com/user', {
-      headers: {
-        Authorization: `token ${token}`,
-        Accept: 'application/vnd.github.v3+json',
-      },
-    })
-      .then((res) => {
-        if (res.status === 401) {
-          delToken();
-          return null;
-        }
-        if (!res.ok) {
-          throw new Error(`GitHub API error: ${res.status}`);
-        }
-        return res.json();
-      })
-      .then((data) => {
-        if (data?.avatar_url) {
-          setAvatar(`${data.avatar_url}?s=40`);
-        }
-      })
-      .catch((err) => {
-        console.error('Ошибка загрузки аватарки:', err);
-      })
-      .finally(() => {
-        setIsLoadingAvatar(false);
-      });
-  }, [token, delToken]);
-
-  return {avatar, isLoadingAvatar, setAvatar};
+  return {avatar, isLoadingAvatar, user, logout};
 };
