@@ -7,7 +7,6 @@ export const githubApi = axios.create({
   },
 });
 
-// Interceptor для обработки 401 ошибок
 export const setupAuthInterceptor = (delToken) => {
   githubApi.interceptors.response.use(
     (response) => response,
@@ -16,11 +15,10 @@ export const setupAuthInterceptor = (delToken) => {
         delToken();
       }
       return Promise.reject(error);
-    },
+    }
   );
 };
 
-// API методы
 export const getUserData = (token) =>
   githubApi.get('/user', {
     headers: {

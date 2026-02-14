@@ -19,7 +19,7 @@ export const useBestPosts = () => {
             headers: {
               'User-Agent': 'MyRedditClient/0.1 (educational project)',
             },
-          },
+          }
         );
 
         if (!response.ok) {

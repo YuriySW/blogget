@@ -34,7 +34,7 @@ export const fetchComments = (postId) => async (dispatch) => {
         headers: {
           'User-Agent': 'MyRedditClient/0.1 (educational project)',
         },
-      },
+      }
     );
 
     if (!response.ok) {
@@ -51,7 +51,7 @@ export const fetchComments = (postId) => async (dispatch) => {
       commentsRequestSuccess({
         postData: post,
         comments: commentsData,
-      }),
+      })
     );
 
     return {post, commentsData};

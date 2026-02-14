@@ -20,7 +20,7 @@ export const useCommentsData = (postId) => {
             headers: {
               'User-Agent': 'MyRedditClient/0.1 (educational project)',
             },
-          },
+          }
         );
 
         if (!response.ok) throw new Error(`HTTP ${response.status}`);

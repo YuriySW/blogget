@@ -28,7 +28,7 @@ export const Text = (prop) => {
     {[style[`fst${tsize}`]]: tsize},
     {[style[`fsd${dsize}`]]: dsize},
     {[style.medium]: medium},
-    {[style.bold]: bold},
+    {[style.bold]: bold}
   );
 
   return (

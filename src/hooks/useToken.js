@@ -3,13 +3,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import {updateToken, deleteToken} from '../store/tokenReducer';
 import {PROXY_URL} from '../api/const.js';
 
-// Функция для получения токена
 export const useGetToken = () => {
   const token = useSelector((state) => state.token.token);
   return token;
 };
 
-// Функция для установки/удаления токена
 export const useSetToken = () => {
   const dispatch = useDispatch();
 
@@ -24,7 +22,6 @@ export const useSetToken = () => {
   return {setToken, delToken};
 };
 
-// Основной хук для обмена кода на токен
 export const useToken = () => {
   const token = useGetToken();
   const {setToken, delToken} = useSetToken();
@@ -32,13 +29,11 @@ export const useToken = () => {
 
   useEffect(() => {
     const handleTokenExchange = async () => {
-      // Проверяем, нужен ли обмен кода
       const isAuthRoute = window.location.hash.includes('/auth');
       const params = new URLSearchParams(window.location.search);
       const code = params.get('code');
       const error = params.get('error');
 
-      // Если не на роуте авторизации или нет кода - выходим
       if (!isAuthRoute || !code) return;
 
       // Если была ошибка от GitHub
@@ -83,13 +78,13 @@ export const useToken = () => {
           window.history.replaceState(
             {},
             '',
-            window.location.pathname + cleanHash,
+            window.location.pathname + cleanHash
           );
           window.location.hash = '/';
         } else {
           console.error(
             'Не удалось получить токен:',
-            data.error_description || data,
+            data.error_description || data
           );
         }
       } catch (err) {
