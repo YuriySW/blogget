@@ -183,8 +183,6 @@
   padding: 20px;
 }
 
-/* Modal.module.css - добавьте к существующим стилям */
-
 .loadingContainer {
   min-height: 300px;
   display: flex;
