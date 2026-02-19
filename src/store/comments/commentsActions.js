@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const COMMENTS_REQUEST = 'COMMENTS_REQUEST';
 export const COMMENTS_REQUEST_SUCCESS = 'COMMENTS_REQUEST_SUCCESS';
 export const COMMENTS_REQUEST_ERROR = 'COMMENTS_REQUEST_ERROR';
@@ -21,27 +23,17 @@ export const commentsClear = () => ({
   type: COMMENTS_CLEAR,
 });
 
-// Async action
 export const fetchComments = (postId) => async (dispatch) => {
   if (!postId) return;
 
   dispatch(commentsRequest());
 
   try {
-    const response = await fetch(
-      `https://www.reddit.com/comments/${postId}.json`,
-      {
-        headers: {
-          'User-Agent': 'MyRedditClient/0.1 (educational project)',
-        },
-      }
+    const {data} = await axios.get(
+      `https://www.reddit.com/comments/${postId}.json`
     );
 
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
-    }
-
-    const [postListing, commentsListing] = await response.json();
+    const [postListing, commentsListing] = data;
     const post = postListing.data.children[0].data;
     const commentsData = commentsListing.data.children
       .filter((child) => child.kind === 't1')
@@ -58,6 +50,5 @@ export const fetchComments = (postId) => async (dispatch) => {
   } catch (err) {
     console.error('Ошибка загрузки комментариев:', err);
     dispatch(commentsRequestError('Не удалось загрузить комментарии'));
-    throw err;
   }
 };
