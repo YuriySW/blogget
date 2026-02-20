@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/blogget/static/css/main.7a8d43ad.css",
-    "main.js": "/blogget/static/js/main.da3eb662.js",
+    "main.css": "/blogget/static/css/main.d0e8168a.css",
+    "main.js": "/blogget/static/js/main.a1a96ff5.js",
     "static/media/merriweather-sans-v20-latin_cyrillic-ext-700.woff": "/blogget/static/media/merriweather-sans-v20-latin_cyrillic-ext-700.d14ade0212b2a8541413.woff",
     "static/media/merriweather-sans-v20-latin_cyrillic-ext-500.woff": "/blogget/static/media/merriweather-sans-v20-latin_cyrillic-ext-500.2206a760c25c43b14af8.woff",
     "static/media/merriweather-sans-v20-latin_cyrillic-ext-regular.woff": "/blogget/static/media/merriweather-sans-v20-latin_cyrillic-ext-regular.44846330ef5e4435929c.woff",
@@ -19,11 +19,11 @@
     "static/media/arrow.svg": "/blogget/static/media/arrow.d412babf78121a5fea10a05d7b1502fb.svg",
     "static/media/up.svg": "/blogget/static/media/up.1c426ad418b0a7d3d05c.svg",
     "static/media/down.svg": "/blogget/static/media/down.43603c59a9a1a57128ab.svg",
-    "main.7a8d43ad.css.map": "/blogget/static/css/main.7a8d43ad.css.map",
-    "main.da3eb662.js.map": "/blogget/static/js/main.da3eb662.js.map"
+    "main.d0e8168a.css.map": "/blogget/static/css/main.d0e8168a.css.map",
+    "main.a1a96ff5.js.map": "/blogget/static/js/main.a1a96ff5.js.map"
   },
   "entrypoints": [
-    "static/css/main.7a8d43ad.css",
-    "static/js/main.da3eb662.js"
+    "static/css/main.d0e8168a.css",
+    "static/js/main.a1a96ff5.js"
   ]
 }
