@@ -1,3 +1,5 @@
+// Post/Post.jsx
+import {forwardRef} from 'react';
 import PropTypes from 'prop-types';
 import style from './Post.module.css';
 import notphoto from './img/notphoto.jpg';
@@ -7,11 +9,11 @@ import {DeleteButton} from './DeleteButton/DeleteButton';
 import {Rating} from './Rating/Rating';
 import {PostDate} from './PostDate/PostDate';
 
-export const Post = ({postData, onTitleClick}) => {
+export const Post = forwardRef(({postData, onTitleClick}, ref) => {
   const {title, author, ups, date, thumbnail, url} = postData;
 
   return (
-    <li className={style.post}>
+    <li className={style.post} ref={ref}>
       <PostImage src={thumbnail || notphoto} alt={title} />
       <PostContent
         title={title}
@@ -24,7 +26,9 @@ export const Post = ({postData, onTitleClick}) => {
       <PostDate date={date} />
     </li>
   );
-};
+});
+
+Post.displayName = 'Post';
 
 Post.propTypes = {
   postData: PropTypes.shape({

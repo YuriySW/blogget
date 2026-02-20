@@ -20,6 +20,7 @@
   justify-content: space-between;
   gap: 10px;
   background-color: var(--white);
+  text-decoration: none;
 }
 
 .btn:hover {
@@ -65,4 +66,13 @@
   .item {
     border: none;
   }
+}
+
+.active {
+  background-color: rgb(196, 194, 194);
+  color: white;
+}
+
+.active svg {
+  fill: white;
 }

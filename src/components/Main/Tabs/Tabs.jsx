@@ -1,5 +1,6 @@
+// components/Main/Tabs/Tabs.jsx
+import {NavLink, useLocation} from 'react-router-dom';
 import style from './Tabs.module.css';
-import PropTypes from 'prop-types';
 import {useState, useEffect} from 'react';
 import {assignId} from '../../../utils/generateRandomId';
 import {ReactComponent as ArrowIcon} from './img/arrow.svg';
@@ -11,16 +12,19 @@ import {debounceRaf} from '../../../utils/debounce';
 import {Text} from '../../../Ul/Text/Text';
 
 const LIST = [
-  {value: 'Главная', Icon: HomeIcon},
-  {value: 'Топ', Icon: Top},
-  {value: 'Лучшие', Icon: Best},
-  {value: 'Горячие', Icon: Hot},
+  {value: 'Главная', Icon: HomeIcon, path: '/home'},
+  {value: 'Топ', Icon: Top, path: '/top'},
+  {value: 'Лучшие', Icon: Best, path: '/best'},
+  {value: 'Горячие', Icon: Hot, path: '/hot'},
 ].map(assignId);
 
 export const Tabs = () => {
+  const location = useLocation();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdown, setIsDropdown] = useState(true);
-  const [selectedTab, setSelectedTab] = useState(LIST[0]);
+
+  const selectedTab =
+    LIST.find((item) => item.path === location.pathname) || LIST[0];
 
   const handleResize = () => {
     if (document.documentElement.clientWidth <= 768) {
@@ -38,11 +42,6 @@ export const Tabs = () => {
       window.removeEventListener('resize', debounceResize);
     };
   }, []);
-
-  const handleTabSelect = (item) => {
-    setSelectedTab(item);
-    setIsDropdownOpen(false);
-  };
 
   return (
     <div className={style.container}>
@@ -62,18 +61,21 @@ export const Tabs = () => {
       {(isDropdownOpen || !isDropdown) && (
         <ul className={style.list}>
           {LIST.map((item) => {
-            const {value, id, Icon} = item;
+            const {value, id, Icon, path} = item;
             return (
               <li className={style.item} key={id}>
-                <button
-                  className={style.btn}
-                  onClick={() => handleTabSelect(item)}
+                <NavLink
+                  to={path}
+                  className={({isActive}) =>
+                    `${style.btn} ${isActive ? style.active : ''}`
+                  }
+                  onClick={() => setIsDropdownOpen(false)}
                 >
                   <Text left medium>
                     {value}
                   </Text>
                   <Icon width={30} height={30} />
-                </button>
+                </NavLink>
               </li>
             );
           })}
@@ -81,9 +83,4 @@ export const Tabs = () => {
       )}
     </div>
   );
-};
-
-Tabs.propTypes = {
-  list: PropTypes.array,
-  setList: PropTypes.func,
 };
