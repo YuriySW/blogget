@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types';
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {
-  fetchComments,
-  commentsClear,
-} from '../../store/comments/commentsActions';
+import {commentsRequestAsync} from '../../store/comments/commentThunks';
+import {commentsClear} from '../../store/comments/commentSlice.js';
+
 import style from './Modal.module.css';
 import {ReactComponent as CloseIcon} from './img/close.svg';
 import {Comments} from '../Comments/Comments';
@@ -13,14 +12,16 @@ import {Preloader} from '../../Ul/Preloader/Preloader';
 
 export const Modal = ({postId, onClose}) => {
   const dispatch = useDispatch();
+
   const {postData, comments, status, error} = useSelector(
     (state) => state.comments
   );
 
   useEffect(() => {
     if (postId) {
-      dispatch(fetchComments(postId));
+      dispatch(commentsRequestAsync(postId));
     }
+
     return () => {
       dispatch(commentsClear());
     };
@@ -30,6 +31,7 @@ export const Modal = ({postId, onClose}) => {
     const handleEsc = (e) => {
       if (e.key === 'Escape') onClose();
     };
+
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
   }, [onClose]);
@@ -37,21 +39,18 @@ export const Modal = ({postId, onClose}) => {
   const renderPostContent = () => {
     if (!postData) return null;
 
-    // Картинка, если есть thumbnail или url — картинка
     if (
-      postData.thumbnail ||
+      postData.thumbnail_url ||
       (postData.url && /\.(jpg|jpeg|png|gif|webp)$/i.test(postData.url))
     ) {
-      const imgSrc = postData.thumbnail || postData.url;
+      const imgSrc = postData.thumbnail_url || postData.url;
       return <img src={imgSrc} alt={postData.title} className={style.media} />;
     }
 
-    // Текст поста
-    if (postData.text) {
-      return <div dangerouslySetInnerHTML={{__html: postData.text}} />;
+    if (postData.body) {
+      return <div dangerouslySetInnerHTML={{__html: postData.body}} />;
     }
 
-    // Ссылка
     if (postData.url) {
       return (
         <p>
@@ -83,7 +82,7 @@ export const Modal = ({postId, onClose}) => {
             <p className={style.errorText}>{error}</p>
             <button
               className={style.retryBtn}
-              onClick={() => dispatch(fetchComments(postId))}
+              onClick={() => dispatch(commentsRequestAsync(postId))}
             >
               Попробовать снова
             </button>
@@ -93,10 +92,14 @@ export const Modal = ({postId, onClose}) => {
         {status === 'success' && postData && (
           <>
             <h2 className={style.title}>{postData.title}</h2>
+
             <p className={style.author}>
               Автор: {postData.author} ·{' '}
-              {new Date(postData.created_utc * 1000).toLocaleString()}
+              {postData.created_utc
+                ? new Date(postData.created_utc * 1000).toLocaleString()
+                : ''}
             </p>
+
             <div className={style.content}>{renderPostContent()}</div>
 
             <Comments comments={comments} />

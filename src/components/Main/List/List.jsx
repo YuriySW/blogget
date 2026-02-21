@@ -1,8 +1,9 @@
-// components/Main/List/List.jsx
 import {useEffect, useRef, useCallback} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useLocation} from 'react-router-dom';
-import {fetchBestPosts, SORT_MAP} from '../../../store/posts/postsActions';
+import {fetchPostsAsync} from '../../../store/posts/postsThunks';
+import {SORT_MAP} from '../../../store/posts/sortMap';
+
 import {usePostModal} from '../../../context/PostModalContext';
 import {Post} from './Post/Post';
 import {Modal} from '../../Modal/Modal';
@@ -12,26 +13,35 @@ import style from './List.module.css';
 export const List = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+
   const {posts, status, error, page, hasMore} = useSelector(
     (state) => state.posts
   );
+
   const {selectedPostId, openModal, closeModal} = usePostModal();
+
   const observerRef = useRef();
   const isLoadingMore = useRef(false);
 
   const currentSort = SORT_MAP[location.pathname];
 
-  // НЕ загружаем посты на главной странице
   useEffect(() => {
     if (currentSort) {
-      dispatch(fetchBestPosts(currentSort, 1));
+      dispatch(fetchPostsAsync({sort: currentSort, page: 1}));
     }
   }, [dispatch, currentSort]);
 
   const loadMore = useCallback(() => {
     if (hasMore && !isLoadingMore.current && currentSort) {
       isLoadingMore.current = true;
-      dispatch(fetchBestPosts(currentSort, page + 1, true)).finally(() => {
+
+      dispatch(
+        fetchPostsAsync({
+          sort: currentSort,
+          page: page + 1,
+          isLoadMore: true,
+        })
+      ).finally(() => {
         isLoadingMore.current = false;
       });
     }
@@ -40,7 +50,10 @@ export const List = () => {
   const lastPostRef = useCallback(
     (node) => {
       if (status === 'loading') return;
-      if (observerRef.current) observerRef.current.disconnect();
+
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
 
       observerRef.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMore) {
@@ -55,11 +68,10 @@ export const List = () => {
 
   const handleRetry = () => {
     if (currentSort) {
-      dispatch(fetchBestPosts(currentSort, 1));
+      dispatch(fetchPostsAsync({sort: currentSort, page: 1}));
     }
   };
 
-  // Если мы на главной странице (/home или /), ничего не показываем
   if (!currentSort) {
     return null;
   }
@@ -84,6 +96,7 @@ export const List = () => {
       <ul className={style.list}>
         {posts.map((post, index) => {
           const isLast = index === posts.length - 1;
+
           return (
             <Post
               key={post.id}
