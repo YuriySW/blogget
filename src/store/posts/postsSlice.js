@@ -1,49 +1,78 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {fetchPostsAsync} from './postsThunks';
 
 const initialState = {
   posts: [],
-  status: 'idle',
-  error: null,
+  searchQuery: '',
+  sort: 'Hot',
   page: 1,
   hasMore: true,
+  status: 'idle', // idle / loading / success / error
+  error: null,
 };
 
-export const postsSlice = createSlice({
+const postsSlice = createSlice({
   name: 'posts',
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
+  reducers: {
+    setSearchQuery(state, action) {
+      state.searchQuery = action.payload.trim();
+      state.page = 1;
+      state.posts = [];
+      state.hasMore = true;
+      state.status = 'loading';
+    },
 
-      .addCase(fetchPostsAsync.pending, (state, action) => {
-        const {isLoadMore} = action.meta.arg;
+    setSort(state, action) {
+      state.sort = action.payload;
+      state.page = 1;
+      state.posts = [];
+      state.hasMore = true;
+      state.status = 'loading';
+    },
 
-        if (!isLoadMore) {
-          state.status = 'loading';
-          state.error = null;
-        }
-      })
+    clearPosts(state) {
+      state.posts = [];
+      state.page = 1;
+      state.hasMore = true;
+      state.status = 'idle';
+      state.error = null;
+    },
 
-      .addCase(fetchPostsAsync.fulfilled, (state, action) => {
-        const {posts, page, isLoadMore} = action.payload;
+    fetchPostsRequest(state, action) {
+      const {isLoadMore = false} = action.payload || {};
+      if (!isLoadMore) {
+        state.status = 'loading';
+        state.error = null;
+      }
+    },
 
-        if (isLoadMore) {
-          state.posts = [...state.posts, ...posts];
-        } else {
-          state.posts = posts;
-          state.status = 'success';
-        }
+    fetchPostsSuccess(state, action) {
+      const {posts, page, isLoadMore = false} = action.payload;
+      if (isLoadMore) {
+        state.posts = [...state.posts, ...posts];
+      } else {
+        state.posts = posts;
+        state.status = 'success';
+      }
+      state.page = page;
+      state.hasMore = posts.length === 10;
+      state.error = null;
+    },
 
-        state.page = page;
-        state.hasMore = posts.length === 10;
-      })
-
-      .addCase(fetchPostsAsync.rejected, (state, action) => {
-        state.status = 'error';
-        state.error = action.payload;
-      });
+    fetchPostsFailure(state, action) {
+      state.status = 'error';
+      state.error = action.payload;
+    },
   },
 });
+
+export const {
+  setSearchQuery,
+  setSort,
+  clearPosts,
+  fetchPostsRequest,
+  fetchPostsSuccess,
+  fetchPostsFailure,
+} = postsSlice.actions;
 
 export default postsSlice.reducer;

@@ -1,9 +1,8 @@
 import {useEffect, useRef, useCallback} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useLocation} from 'react-router-dom';
-import {fetchPostsAsync} from '../../../store/posts/postsThunks';
+import {setSort, fetchPostsRequest} from '../../../store/posts/postsSlice';
 import {SORT_MAP} from '../../../store/posts/sortMap';
-
 import {usePostModal} from '../../../context/PostModalContext';
 import {Post} from './Post/Post';
 import {Modal} from '../../Modal/Modal';
@@ -13,68 +12,91 @@ import style from './List.module.css';
 export const List = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const {selectedPostId, openModal, closeModal} = usePostModal();
 
-  const {posts, status, error, page, hasMore} = useSelector(
+  const {posts, status, error, page, hasMore, searchQuery} = useSelector(
     (state) => state.posts
   );
 
-  const {selectedPostId, openModal, closeModal} = usePostModal();
+  const currentSort = SORT_MAP[location.pathname] || 'Hot';
 
-  const observerRef = useRef();
+  const observerRef = useRef(null);
   const isLoadingMore = useRef(false);
 
-  const currentSort = SORT_MAP[location.pathname];
-
+  // Смена категории / сортировки
   useEffect(() => {
     if (currentSort) {
-      dispatch(fetchPostsAsync({sort: currentSort, page: 1}));
+      dispatch(setSort(currentSort));
     }
   }, [dispatch, currentSort]);
 
   const loadMore = useCallback(() => {
-    if (hasMore && !isLoadingMore.current && currentSort) {
-      isLoadingMore.current = true;
-
-      dispatch(
-        fetchPostsAsync({
-          sort: currentSort,
-          page: page + 1,
-          isLoadMore: true,
-        })
-      ).finally(() => {
-        isLoadingMore.current = false;
-      });
+    if (!hasMore) {
+      console.log('hasMore = false → выходим');
+      return;
     }
-  }, [dispatch, currentSort, page, hasMore]);
+
+    if (isLoadingMore.current) {
+      console.log('уже загружается → выходим');
+      return;
+    }
+
+    isLoadingMore.current = true;
+
+    dispatch(
+      fetchPostsRequest({
+        sort: currentSort,
+        page: page + 1,
+        searchQuery,
+        isLoadMore: true,
+      })
+    );
+
+    // Сбрасываем флаг через небольшую задержку
+    // Это предотвращает множественные вызовы, но позволяет продолжить подгрузку
+    setTimeout(() => {
+      isLoadingMore.current = false;
+    }, 400); // 400 мс — хороший баланс (можно 300–600)
+  }, [dispatch, currentSort, page, hasMore, searchQuery]);
 
   const lastPostRef = useCallback(
     (node) => {
-      if (status === 'loading') return;
-
       if (observerRef.current) {
         observerRef.current.disconnect();
       }
 
-      observerRef.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasMore) {
-          loadMore();
+      observerRef.current = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            loadMore();
+          }
+        },
+        {
+          root: null,
+          rootMargin: '300px 0px', // подгружаем заранее, когда до конца осталось 300px
+          threshold: 0.01,
         }
-      });
+      );
 
-      if (node) observerRef.current.observe(node);
+      if (node) {
+        observerRef.current.observe(node);
+      }
     },
-    [status, hasMore, loadMore]
+    [loadMore]
   );
 
   const handleRetry = () => {
-    if (currentSort) {
-      dispatch(fetchPostsAsync({sort: currentSort, page: 1}));
-    }
+    dispatch(
+      fetchPostsRequest({
+        sort: currentSort,
+        page: 1,
+        searchQuery,
+        isLoadMore: false,
+      })
+    );
   };
 
-  if (!currentSort) {
-    return null;
-  }
+  if (!currentSort) return null;
 
   if (status === 'loading' && posts.length === 0) {
     return <Preloader />;
@@ -83,20 +105,22 @@ export const List = () => {
   if (status === 'error' && posts.length === 0) {
     return (
       <div className={style.error}>
-        <p className={style.errorText}>Ошибка: {error}</p>
-        <button className={style.retryBtn} onClick={handleRetry}>
-          Попробовать снова
-        </button>
+        <p>Ошибка: {error}</p>
+        <button onClick={handleRetry}>Попробовать снова</button>
       </div>
     );
   }
 
   return (
     <>
+      {searchQuery && (
+        <div className={style.searchResultsInfo}>
+          Результаты поиска по запросу: <strong>{searchQuery}</strong>
+        </div>
+      )}
       <ul className={style.list}>
         {posts.map((post, index) => {
           const isLast = index === posts.length - 1;
-
           return (
             <Post
               key={post.id}
@@ -118,7 +142,7 @@ export const List = () => {
 
       {hasMore && (
         <div className={style.loadingMore}>
-          <Preloader />
+          {status === 'loading' ? <Preloader /> : null}
         </div>
       )}
 

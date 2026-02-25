@@ -58,3 +58,26 @@
     color: var(--orange);
   }
 }
+
+/* Search.module.css - добавьте */
+.clear {
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #999;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: color 0.2s;
+}
+
+.clear:hover {
+  color: #333;
+}
+
+.form {
+  position: relative;
+}
