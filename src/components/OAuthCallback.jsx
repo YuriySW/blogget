@@ -1,4 +1,4 @@
-// import {Preloader} from './Ul/Preloader/Preloader';
+import {Preloader} from '../Ul/Preloader/Preloader';
 
 // const OAuthCallback = () => <Preloader />;
 
@@ -13,6 +13,7 @@ const OAuthCallback = () => (
   <main className={style.main}>
     <Layout>
       <Tabs />
+      <Preloader />
     </Layout>
   </main>
 );
