@@ -1,5 +1,5 @@
 // components/OAuthCallback.jsx
-import Layout from './Layout';
+import Layout from './Layout/Layout';
 const OAuthCallback = () => (
   <main>
     <Layout>
