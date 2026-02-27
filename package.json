@@ -1,6 +1,5 @@
 {
   "name": "blogget",
-  "homepage": "https://yuriysw.github.io/blogget",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -29,7 +28,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "comp": "hygen create component",
-    "predeploy": "npm run build",
+    "build:gh": "PUBLIC_URL=/blogget react-scripts build",
+    "predeploy": "npm run build:gh",
     "deploy": "gh-pages -d build",
     "lint": "eslint src --ext .js,.jsx",
     "lint:fix": "eslint src --ext .js,.jsx --fix",
