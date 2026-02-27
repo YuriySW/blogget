@@ -8,7 +8,13 @@ import {store} from './store';
 import {useToken} from './hooks/useToken';
 
 function AppContent() {
-  useToken();
+  // useToken();
+  const {loading} = useToken();
+
+  if (loading) {
+    return <div>Загрузка...</div>;
+  }
+
   return (
     <PostModalProvider>
       <Header />
