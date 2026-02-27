@@ -1,3 +1,10 @@
 // components/OAuthCallback.jsx
-const OAuthCallback = () => null;
+import Layout from './Layout';
+const OAuthCallback = () => (
+  <main>
+    <Layout>
+      <p>Выполняется вход...</p>
+    </Layout>
+  </main>
+);
 export default OAuthCallback;
