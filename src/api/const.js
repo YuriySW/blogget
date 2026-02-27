@@ -12,10 +12,14 @@ export const RESPONSE_TYPE = 'code';
 
 export const RANDOM_STRING = 'random_string_abc123';
 
+// export const REDIRECT_URI =
+//   process.env.NODE_ENV === 'development'
+//     ? 'http://localhost:3000/#/auth'
+//     : 'https://yuriysw.github.io/blogget/#/auth';
 export const REDIRECT_URI =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000/#/auth'
-    : 'https://yuriysw.github.io/blogget/#/auth';
+    : `${window.location.origin}/#/auth`;
 
 export const PROXY_URL =
   process.env.NODE_ENV === 'development'
