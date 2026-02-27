@@ -1,12 +1,11 @@
 import {Routes, Route} from 'react-router-dom';
 import Header from './components/Header';
 import Main from './components/Main';
-import NotFound from './components/NotFound/NotFound';
+// import NotFound from './components/NotFound/NotFound';
 import {Provider} from 'react-redux';
 import {PostModalProvider} from './context/PostModalContext';
 import {store} from './store';
 import {useToken} from './hooks/useToken';
-import OAuthCallback from './components/OAuthCallback';
 
 function AppContent() {
   useToken();
@@ -20,8 +19,8 @@ function AppContent() {
         <Route path="/top" element={<Main />} />
         <Route path="/best" element={<Main />} />
         <Route path="/hot" element={<Main />} />
-        <Route path="/auth" element={<OAuthCallback />} />
-        <Route path="*" element={<NotFound />} />
+
+        {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
     </PostModalProvider>
   );
