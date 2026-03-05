@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# Blogget
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Blogget** — это современное веб-приложение на React для просмотра контента (аналог клиента Reddit), разработанное в рамках обучения JavaScript. Проект демонстрирует работу с API, управление сложным состоянием и современную архитектуру фронтенд-приложения.
 
-## Available Scripts
+## 🚀 Технологии
 
-In the project directory, you can run:
+Проект построен с использованием следующих технологий:
 
-### `npm start`
+- **Библиотека**: [React 19](https://reactjs.org/)
+- **Управление состоянием**: [Redux Toolkit](https://redux-toolkit.js.org/) & [Redux-Saga](https://redux-saga.js.org/) (для асинхронных запросов и поиска)
+- **Маршрутизация**: [React Router 6](https://reactrouter.com/)
+- **HTTP-клиент**: [Axios](https://axios-http.com/)
+- **Стилизация**: CSS Modules для изоляции стилей
+- **Сборка и инструменты**: 
+  - [Create React App](https://create-react-app.dev/)
+  - [Hygen](https://www.hygen.io/) (генерация компонентов)
+  - [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/) (качество кода)
+- **Деплой**: Vercel / GitHub Pages
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## ✨ Основные возможности
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Авторизация**: Интеграция с OAuth для входа пользователей.
+- **Лента постов**: Просмотр популярных, новых и топовых постов.
+- **Категории**: Удобная навигация по разделам с помощью вкладок.
+- **Комментарии**: Просмотр обсуждений в модальных окнах.
+- **Поиск**: Живой поиск постов с использованием Redux-Saga (debounce).
+- **Бесконечная прокрутка**: Подгрузка контента при скролле.
+- **Адаптивность**: Корректное отображение на мобильных устройствах и десктопах.
 
-### `npm test`
+## 🛠 Установка и запуск
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Клонируйте репозиторий:
+   ```bash
+   git clone https://github.com/your-username/blogget.git
+   ```
+2. Установите зависимости:
+   ```bash
+   npm install
+   ```
+3. Создайте файл `.env` в корне проекта и добавьте необходимые ключи (например, для API).
+4. Запустите проект в режиме разработки:
+   ```bash
+   npm start
+   ```
 
-### `npm run build`
+## 🏗 Структура проекта
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `src/api`: Логика взаимодействия с внешними API.
+- `src/components`: Переиспользуемые UI-компоненты.
+- `src/context`: React Context для передачи данных.
+- `src/hooks`: Кастомные хуки.
+- `src/store`: Конфигурация Redux, слайсы и саги.
+- `src/UI`: Базовые UI-элементы (кнопки, лоадеры, текст).
+- `src/utils`: Вспомогательные функции.
